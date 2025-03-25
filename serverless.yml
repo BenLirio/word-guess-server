@@ -3,7 +3,6 @@ service: word-guess-server
 frameworkVersion: '4'
 
 plugins:
-  - serverless-webpack
   - serverless-offline
   # Note: serverless-plugin-typescript is not included as it's not compatible with serverless v4+
 
@@ -12,6 +11,8 @@ custom:
     webpackConfig: webpack.config.js
     includeModules: true
     packager: npm
+  build:
+    esbuild: false
 
 provider:
   name: aws
@@ -31,7 +32,7 @@ provider:
             - logs:CreateLogGroup
             - logs:CreateLogStream
             - logs:PutLogEvents
-          Resource: "*"
+          Resource: '*'
 
 functions:
   hello:
