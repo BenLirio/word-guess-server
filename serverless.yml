@@ -1,0 +1,46 @@
+service: word-guess-server
+
+frameworkVersion: '4'
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  # Note: serverless-plugin-typescript is not included as it's not compatible with serverless v4+
+
+custom:
+  webpack:
+    webpackConfig: webpack.config.js
+    includeModules: true
+    packager: npm
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  memorySize: 256
+  timeout: 30
+  logRetentionInDays: 14
+  environment:
+    NODE_ENV: ${self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: "*"
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - http:
+          method: get
+          path: hello
+          cors: true
+
+package:
+  individually: true
