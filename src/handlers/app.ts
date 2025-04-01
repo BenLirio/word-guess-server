@@ -1,7 +1,18 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda';
+import { RequestWrapper } from '../types/shared';
+import { buildUnknownFunctionHandler, functionHandlers } from '../functions';
+import * as AWS from 'aws-sdk';
+import OpenAI from 'openai';
+
+const ddb = new AWS.DynamoDB.DocumentClient();
+const openai = new OpenAI();
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
   try {
+    const { functionName, request } = JSON.parse(event.body || '{}') as RequestWrapper;
+    const functionHandler =
+      functionHandlers[functionName] || buildUnknownFunctionHandler(functionName);
+    const functionResponse = await functionHandler({ event, context, ddb, openai })(request);
     const response: APIGatewayProxyResult = {
       statusCode: 200,
       headers: {
@@ -9,14 +20,7 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': true,
       },
-      body: JSON.stringify({
-        message: 'Hello from Serverless TypeScript!',
-        timestamp: new Date().toISOString(),
-        requestContext: {
-          requestId: context.awsRequestId,
-        },
-        queryStringParameters: event.queryStringParameters,
-      }),
+      body: JSON.stringify(functionResponse),
     };
 
     return response;

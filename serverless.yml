@@ -24,6 +24,9 @@ provider:
   logRetentionInDays: 14
   environment:
     NODE_ENV: ${self:provider.stage}
+    AWS_REGION: ${self:provider.region}
+    WORD_GUESS_DB_TABLE_NAME: ${env:WORD_GUESS_DB_TABLE_NAME, 'word-guess-db'}
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY} # Add this line
   iam:
     role:
       statements:
@@ -36,11 +39,11 @@ provider:
 
 functions:
   hello:
-    handler: src/handlers/hello.handler
+    handler: src/handlers/app.handler
     events:
       - http:
-          method: get
-          path: hello
+          method: POST
+          path: app
           cors: true
 
 package:
