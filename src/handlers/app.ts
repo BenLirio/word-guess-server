@@ -5,7 +5,9 @@ import * as AWS from 'aws-sdk';
 import OpenAI from 'openai';
 
 const ddb = new AWS.DynamoDB.DocumentClient();
-const openai = new OpenAI();
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
   try {
@@ -25,6 +27,7 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 
     return response;
   } catch (error) {
+    console.error('Error processing request:', error);
     return {
       statusCode: 500,
       headers: {

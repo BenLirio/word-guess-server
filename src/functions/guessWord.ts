@@ -11,7 +11,7 @@ const spectrumY: Spectrum = {
   right: 'lame',
 };
 
-export const rankWordBothDirections =
+const rankWordBothDirections =
   (ctxt: FunctionContext) =>
   (spectrum: Spectrum) =>
   (low: number, high: number) =>
@@ -31,12 +31,13 @@ export const rankWordBothDirections =
       reasoning: resultA.reasoning,
     };
   };
-export const rankSeveralRanges =
+
+const rankSeveralRanges =
   (ctxt: FunctionContext) => (spectrum: Spectrum) => async (word: string) => {
     const [resultA, resultB, resultC] = await Promise.all([
-      rankWord(ctxt)(spectrum)(0, 10)(word),
-      rankWord(ctxt)(spectrum)(1, 5)(word),
-      rankWord(ctxt)(spectrum)(1, 100)(word),
+      rankWordBothDirections(ctxt)(spectrum)(0, 10)(word),
+      rankWordBothDirections(ctxt)(spectrum)(1, 5)(word),
+      rankWordBothDirections(ctxt)(spectrum)(1, 100)(word),
     ]);
     return {
       rank: (resultA.rank + resultB.rank + resultC.rank) / 3,
