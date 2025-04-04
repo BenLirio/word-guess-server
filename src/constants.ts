@@ -1,4 +1,4 @@
-import { WordSpectrum } from './types/shared';
+import { WordSpectrum, WordTarget } from './types/shared';
 
 export const spectrum: WordSpectrum = {
   x: {
@@ -9,4 +9,10 @@ export const spectrum: WordSpectrum = {
     left: 'Solo Activity',
     right: 'Group Activity',
   },
+};
+
+export const target: WordTarget = {
+  x: 0.3,
+  y: 0.8,
+  size: 0.2,
 };
