@@ -1,3 +1,14 @@
+export interface WordSpectrum {
+  x: {
+    left: string;
+    right: string;
+  };
+  y: {
+    left: string;
+    right: string;
+  };
+}
+// ================
 export interface GuessWordRequest {
   word: string;
 }
@@ -9,16 +20,7 @@ export type GuessWordFunction = (request: GuessWordRequest) => Promise<GuessWord
 
 export interface GetSpectrumRequest {}
 
-export interface GetSpectrumResponse {
-  x: {
-    left: string;
-    right: string;
-  };
-  y: {
-    left: string;
-    right: string;
-  };
-}
+export type GetSpectrumResponse = WordSpectrum;
 export type GetSpectrumFunction = (request: GetSpectrumRequest) => Promise<GetSpectrumResponse>;
 
 export type RequestType = GuessWordRequest | GetSpectrumRequest;

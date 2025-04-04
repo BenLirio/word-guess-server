@@ -1,15 +1,7 @@
 import { rankWord } from '../ai/rankWord';
+import { spectrum } from '../constants';
 import { FunctionContext, Spectrum } from '../types';
 import { GuessWordFunction, GuessWordRequest } from '../types/shared';
-
-const spectrumX: Spectrum = {
-  left: 'big',
-  right: 'small',
-};
-const spectrumY: Spectrum = {
-  left: 'cool',
-  right: 'lame',
-};
 
 const rankWordBothDirections =
   (ctxt: FunctionContext) =>
@@ -50,8 +42,8 @@ export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
   (ctxt: FunctionContext) =>
   async ({ word }: GuessWordRequest) => {
     const [resultX, resultY] = await Promise.all([
-      rankSeveralRanges(ctxt)(spectrumX)(word),
-      rankSeveralRanges(ctxt)(spectrumY)(word),
+      rankSeveralRanges(ctxt)(spectrum.x)(word),
+      rankSeveralRanges(ctxt)(spectrum.y)(word),
     ]);
     return {
       x: formatRankResult(resultX.rank),
