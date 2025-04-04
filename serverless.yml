@@ -43,7 +43,29 @@ functions:
       - http:
           method: POST
           path: app
-          cors: true
+          cors:
+            origin: '*' # Allow any origin
+            headers:
+              - Content-Type
+              - Authorization
+              - X-Amz-Date
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: true
+      - http:
+          method: OPTIONS
+          path: app
+          cors:
+            origin: '*' # Allow any origin
+            headers:
+              - Content-Type
+              - Authorization
+              - X-Amz-Date
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: true
 
 package:
   individually: true

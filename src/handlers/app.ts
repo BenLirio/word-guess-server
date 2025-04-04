@@ -11,29 +11,43 @@ const openai = new OpenAI({
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
   try {
+    // Handle preflight requests
+    if (event.httpMethod === 'OPTIONS') {
+      return {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+        },
+        body: '',
+      };
+    }
+
     const { functionName, request } = JSON.parse(event.body || '{}') as RequestWrapper;
     const functionHandler =
       functionHandlers[functionName] || buildUnknownFunctionHandler(functionName);
-    const functionResponse = await functionHandler({ event, context, ddb, openai })(request);
+    const functionResponse = await functionHandler({ event, context, ddb, openai })(request as any);
     const response: APIGatewayProxyResult = {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Credentials': 'true',
       },
       body: JSON.stringify(functionResponse),
     };
 
     return response;
   } catch (error) {
-    console.error('Error processing request:', error);
     return {
       statusCode: 500,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Credentials': 'true',
       },
       body: JSON.stringify({
         message: 'Internal Server Error',
