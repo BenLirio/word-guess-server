@@ -1,4 +1,3 @@
-import { spectrum, target } from '../constants';
 import { getAndDeleteToken } from '../ddb/token';
 import { postMessageToThread } from '../discord/postMessage';
 import { FunctionContext } from '../types';
@@ -11,6 +10,7 @@ export const postWin: (
 ) => (request: PostWinRequest) => Promise<PostWinResponse> =
   (ctxt: FunctionContext) =>
   async ({ token, username }: PostWinRequest) => {
+    const { spectrum, target } = ctxt;
     const { word } = await getAndDeleteToken(ctxt)(token);
     const leftX = spectrum.x.left;
     const rightX = spectrum.x.right;

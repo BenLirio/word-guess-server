@@ -1,9 +1,12 @@
 import { APIGatewayProxyEvent, Context } from 'aws-lambda';
 import AWS from 'aws-sdk'; // Import AWS SDK
-import { FunctionType } from './shared';
+import { FunctionType, WordSpectrum, WordTarget } from './shared';
 import OpenAI from 'openai';
 
 export interface FunctionContext {
+  timeUntilNextGraph: number;
+  spectrum: WordSpectrum;
+  target: WordTarget;
   event: APIGatewayProxyEvent;
   context: Context;
   ddb: AWS.DynamoDB.DocumentClient;

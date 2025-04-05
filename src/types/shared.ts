@@ -27,6 +27,16 @@ export interface GuessWordResponse {
 }
 export type GuessWordFunction = (request: GuessWordRequest) => Promise<GuessWordResponse>;
 
+// ==== getTimeUntilNextGraph ====
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface GetTimeUntilNextGraphRequest {}
+export type GetTimeUntilNextGraphResponse = {
+  timeUntilNextGraph: number;
+};
+export type GetTimeUntilNextGraphFunction = (
+  request: GetTimeUntilNextGraphRequest,
+) => Promise<GetTimeUntilNextGraphResponse>;
+
 // ==== get spectrum ====
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface GetSpectrumRequest {}
@@ -53,15 +63,22 @@ export type ResponseType =
   | GuessWordResponse
   | GetSpectrumResponse
   | GetTargetResponse
-  | PostWinResponse;
+  | PostWinResponse
+  | GetTimeUntilNextGraphResponse;
 export type FunctionType =
   | GuessWordFunction
   | GetSpectrumFunction
   | GetTargetFunction
-  | PostWinFunction;
+  | PostWinFunction
+  | GetTimeUntilNextGraphFunction;
 
 // derive function name from FunctionType
-export type FunctionName = 'guessWord' | 'getSpectrum' | 'getTarget' | 'postWin';
+export type FunctionName =
+  | 'guessWord'
+  | 'getSpectrum'
+  | 'getTarget'
+  | 'postWin'
+  | 'getTimeUntilNextGraph';
 export type RequestWrapper = {
   functionName: FunctionName;
   request: RequestType;

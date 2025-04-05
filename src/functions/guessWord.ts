@@ -1,5 +1,4 @@
 import { rankWord } from '../ai/rankWord';
-import { spectrum, target } from '../constants';
 import { storeToken } from '../ddb/token';
 import { FunctionContext, Spectrum } from '../types';
 import { GuessWordFunction, GuessWordRequest, WordTarget } from '../types/shared';
@@ -53,6 +52,7 @@ const generateWinToken = () => uuidv4();
 export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
   (ctxt: FunctionContext) =>
   async ({ word }: GuessWordRequest) => {
+    const { spectrum, target } = ctxt;
     const [resultX, resultY] = await Promise.all([
       rankSeveralRanges(ctxt)(spectrum.x)(word),
       rankSeveralRanges(ctxt)(spectrum.y)(word),

@@ -2,6 +2,7 @@ import { FunctionContext, FunctionHandler } from '../types';
 import { FunctionName } from '../types/shared';
 import { getSpectrum } from './getSpectrum';
 import { getTarget } from './getTarget';
+import { getTimeUntilNextGraph } from './getTimeUntilNextGraph';
 import { guessWord } from './guessWord';
 import { postWin } from './postWin';
 
@@ -17,4 +18,5 @@ export const functionHandlers: Record<FunctionName, FunctionHandler> = {
   getSpectrum,
   getTarget,
   postWin,
+  getTimeUntilNextGraph,
 };
