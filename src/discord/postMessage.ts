@@ -1,3 +1,4 @@
+import { MessageFlags } from 'discord.js';
 import fetch from 'node-fetch';
 
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
@@ -27,7 +28,7 @@ export async function postMessageToThread(message: string): Promise<void> {
     },
     body: JSON.stringify({
       content: message,
-      flags: 64, // @silent flag
+      flags: MessageFlags.SuppressNotifications, // This flag is used to send a silent notification
     }),
   });
 
