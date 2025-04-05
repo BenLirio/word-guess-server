@@ -20,7 +20,7 @@ export const postWin: (
     const leftYPercent = formatTarget(target.y);
     const rightXPercent = formatTarget(1 - target.x);
     const rightYPercent = formatTarget(1 - target.y);
-    const message = `User ${username} has won with word "${word}"!
+    const message = `User "${username}" has won with word "${word}"!
 x-axis: ${leftXPercent} ${leftX} <----> ${rightXPercent} ${rightX}
 y-axis: ${leftYPercent} ${leftY} <----> ${rightYPercent} ${rightY}`;
     await postMessageToThread(message);
