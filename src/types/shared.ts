@@ -19,8 +19,11 @@ export interface GuessWordRequest {
   word: string;
 }
 export interface GuessWordResponse {
+  word: string;
   x: number;
   y: number;
+  hitTarget: boolean;
+  token?: string;
 }
 export type GuessWordFunction = (request: GuessWordRequest) => Promise<GuessWordResponse>;
 
@@ -36,12 +39,29 @@ export interface GetTargetRequest {}
 export type GetTargetResponse = WordTarget;
 export type GetTargetFunction = (request: GetTargetRequest) => Promise<GetTargetResponse>;
 
-export type RequestType = GuessWordRequest | GetSpectrumRequest | GetTargetRequest;
-export type ResponseType = GuessWordResponse | GetSpectrumResponse | GetTargetResponse;
-export type FunctionType = GuessWordFunction | GetSpectrumFunction | GetTargetFunction;
+// ==== post win ====
+export interface PostWinRequest {
+  token: string;
+  username: string;
+}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface PostWinResponse {}
+export type PostWinFunction = (request: PostWinRequest) => Promise<PostWinResponse>;
+
+export type RequestType = GuessWordRequest | GetSpectrumRequest | GetTargetRequest | PostWinRequest;
+export type ResponseType =
+  | GuessWordResponse
+  | GetSpectrumResponse
+  | GetTargetResponse
+  | PostWinResponse;
+export type FunctionType =
+  | GuessWordFunction
+  | GetSpectrumFunction
+  | GetTargetFunction
+  | PostWinFunction;
 
 // derive function name from FunctionType
-export type FunctionName = 'guessWord' | 'getSpectrum' | 'getTarget';
+export type FunctionName = 'guessWord' | 'getSpectrum' | 'getTarget' | 'postWin';
 export type RequestWrapper = {
   functionName: FunctionName;
   request: RequestType;

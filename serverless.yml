@@ -24,7 +24,7 @@ provider:
   logRetentionInDays: 14
   environment:
     NODE_ENV: ${self:provider.stage}
-    WORD_GUESS_DB_TABLE_NAME: ${env:WORD_GUESS_DB_TABLE_NAME, 'word-guess-db'}
+    WORD_GUESS_TOKENS_TABLE_NAME: ${env:WORD_GUESS_TOKENS_TABLE_NAME, 'word-guess-tokens'}
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
     DISCORD_BOT_TOKEN: ${env:DISCORD_BOT_TOKEN}
     DISCORD_CHANNEL_ID: ${env:DISCORD_CHANNEL_ID}

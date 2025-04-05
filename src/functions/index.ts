@@ -3,6 +3,7 @@ import { FunctionName } from '../types/shared';
 import { getSpectrum } from './getSpectrum';
 import { getTarget } from './getTarget';
 import { guessWord } from './guessWord';
+import { postWin } from './postWin';
 
 export const buildUnknownFunctionHandler: (functionName: string) => FunctionHandler =
   (functionName: string | undefined) => (_ctxt: FunctionContext) => async (request: unknown) => {
@@ -15,4 +16,5 @@ export const functionHandlers: Record<FunctionName, FunctionHandler> = {
   guessWord,
   getSpectrum,
   getTarget,
+  postWin,
 };
