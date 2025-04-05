@@ -16,10 +16,10 @@ export const postWin: (
     const rightX = spectrum.x.right;
     const leftY = spectrum.y.left;
     const rightY = spectrum.y.right;
-    const leftXPercent = formatTarget(target.x);
-    const leftYPercent = formatTarget(target.y);
-    const rightXPercent = formatTarget(1 - target.x);
-    const rightYPercent = formatTarget(1 - target.y);
+    const rightXPercent = formatTarget(target.x);
+    const rightYPercent = formatTarget(target.y);
+    const leftXPercent = formatTarget(1 - target.x);
+    const leftYPercent = formatTarget(1 - target.y);
     const message = `User "${username}" has won with word "${word}"!
 x-axis: ${leftXPercent} ${leftX} <----> ${rightXPercent} ${rightX}
 y-axis: ${leftYPercent} ${leftY} <----> ${rightYPercent} ${rightY}`;
