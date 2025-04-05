@@ -33,10 +33,10 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     const functionHandler =
       functionHandlers[functionName] || buildUnknownFunctionHandler(functionName);
     const timeDiff = Date.now() - start;
-    const oneHour = 1000 * 60 * 60;
-    const timeMod = oneHour;
-    const timeUntilNextGraph = oneHour - (timeDiff % timeMod);
-    const idx = Math.floor(timeDiff / oneHour);
+    const fiveMin = 1000 * 60 * 5;
+    const timeMod = fiveMin;
+    const timeUntilNextGraph = fiveMin - (timeDiff % timeMod);
+    const idx = Math.floor(timeDiff / fiveMin);
     const functionResponse = await functionHandler({
       event,
       context,
