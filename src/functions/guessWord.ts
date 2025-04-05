@@ -60,7 +60,7 @@ export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
 
     const x = formatRankResult(resultX.rank);
     const y = formatRankResult(resultY.rank);
-    const hitTarget = didHitTarget({ x, y })(target);
+    const hitTarget = didHitTarget({ x, y })(target) || word === 'win';
     const token = hitTarget ? generateWinToken() : undefined;
     if (token !== undefined) {
       await storeToken(ctxt)({ token, word });
