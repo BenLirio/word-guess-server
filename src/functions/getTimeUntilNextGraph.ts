@@ -4,9 +4,11 @@ import { GetTimeUntilNextGraphRequest, GetTimeUntilNextGraphResponse } from '../
 export const getTimeUntilNextGraph: (
   ctxt: FunctionContext,
 ) => (request: GetTimeUntilNextGraphRequest) => Promise<GetTimeUntilNextGraphResponse> =
-  ({ timeUntilNextGraph }: FunctionContext) =>
+  ({ timeUntilNextGraph, timeMod }: FunctionContext) =>
   async ({}: GetTimeUntilNextGraphRequest) => {
+    const now = Date.now();
     return {
-      timeUntilNextGraph,
+      timeOfNextGraph: now + timeUntilNextGraph,
+      timeMod,
     };
   };

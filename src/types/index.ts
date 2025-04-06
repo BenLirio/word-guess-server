@@ -5,6 +5,7 @@ import OpenAI from 'openai';
 
 export interface FunctionContext {
   timeUntilNextGraph: number;
+  timeMod: number;
   spectrum: WordSpectrum;
   target: WordTarget;
   event: APIGatewayProxyEvent;

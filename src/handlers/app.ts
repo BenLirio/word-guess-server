@@ -33,7 +33,8 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     const functionHandler =
       functionHandlers[functionName] || buildUnknownFunctionHandler(functionName);
     const timeDiff = Date.now() - start;
-    const fiveMin = 1000 * 60 * 5;
+    // const fiveMin = 1000 * 60 * 5;
+    const fiveMin = 1000 * 10;
     const timeMod = fiveMin;
     const timeUntilNextGraph = fiveMin - (timeDiff % timeMod);
     const idx = Math.floor(timeDiff / fiveMin);
@@ -45,6 +46,7 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
       spectrum: spectrums[idx % spectrums.length],
       target: targets[idx % targets.length],
       timeUntilNextGraph,
+      timeMod,
     })(request as any);
     const response: APIGatewayProxyResult = {
       statusCode: 200,
