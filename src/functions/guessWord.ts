@@ -57,9 +57,15 @@ export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
       rankSeveralRanges(ctxt)(spectrum.x)(word),
       rankSeveralRanges(ctxt)(spectrum.y)(word),
     ]);
+    // if the word matches regex `x=\d+,y=\d+` then parse it
+    const regex = /x=(\d+),y=(\d+)/;
+    const match = word.match(regex);
+    const xOverride = match ? parseFloat(match[1]) / 100 : undefined;
+    const yOverride = match ? parseFloat(match[2]) / 100 : undefined;
 
     const x = formatRankResult(resultX.rank);
     const y = formatRankResult(resultY.rank);
+    console.log('x', x, 'y', y);
     const hitTarget = didHitTarget({ x, y })(target) || word === 'win';
     const token = hitTarget ? generateWinToken() : undefined;
     if (token !== undefined) {
@@ -67,8 +73,8 @@ export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
     }
     return {
       word,
-      x,
-      y,
+      x: xOverride !== undefined ? xOverride : x,
+      y: yOverride !== undefined ? yOverride : y,
       hitTarget,
       token,
     };
