@@ -1,4 +1,5 @@
 import { rankWord } from '../ai/rankWord';
+import { saveWin } from '../ddb/leaderboard';
 import { storeToken } from '../ddb/token';
 import { FunctionContext, Spectrum } from '../types';
 import { GuessWordFunction, GuessWordRequest, WordTarget } from '../types/shared';
@@ -71,11 +72,15 @@ export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
     if (token !== undefined) {
       await storeToken(ctxt)({ token, word });
     }
-    return {
+    const result = {
+      id: uuidv4(),
       word,
       x: xOverride !== undefined ? xOverride : x,
       y: yOverride !== undefined ? yOverride : y,
       hitTarget,
       token,
+      timestamp: Date.now(),
     };
+    await saveWin(ctxt)(result);
+    return result;
   };

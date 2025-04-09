@@ -24,6 +24,7 @@ provider:
   logRetentionInDays: 14
   environment:
     NODE_ENV: ${self:provider.stage}
+    WORD_GUESS_LEADERBOARD_TABLE_NAME: ${env:WORD_GUESS_LEADERBOARD_TABLE_NAME, 'guess-word-leaderboard-v2'}
     WORD_GUESS_TOKENS_TABLE_NAME: ${env:WORD_GUESS_TOKENS_TABLE_NAME, 'word-guess-tokens'}
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
     DISCORD_BOT_TOKEN: ${env:DISCORD_BOT_TOKEN}

@@ -1,5 +1,6 @@
 import { FunctionContext, FunctionHandler } from '../types';
 import { FunctionName } from '../types/shared';
+import { getLeaderboard } from './getLeaderboard';
 import { getSpectrum } from './getSpectrum';
 import { getTarget } from './getTarget';
 import { getTimeUntilNextGraph } from './getTimeUntilNextGraph';
@@ -19,4 +20,5 @@ export const functionHandlers: Record<FunctionName, FunctionHandler> = {
   getTarget,
   postWin,
   getTimeUntilNextGraph,
+  getLeaderboard,
 };
