@@ -11,6 +11,7 @@ export interface FunctionContext {
   event: APIGatewayProxyEvent;
   context: Context;
   ddb: AWS.DynamoDB.DocumentClient;
+  s3: AWS.S3;
   openai: OpenAI;
 }
 

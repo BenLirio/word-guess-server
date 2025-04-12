@@ -5,6 +5,7 @@ import { getSpectrum } from './getSpectrum';
 import { getTarget } from './getTarget';
 import { getTimeUntilNextGraph } from './getTimeUntilNextGraph';
 import { guessWord } from './guessWord';
+import { listWins } from './listWins';
 import { postWin } from './postWin';
 
 export const buildUnknownFunctionHandler: (functionName: string) => FunctionHandler =
@@ -21,4 +22,5 @@ export const functionHandlers: Record<FunctionName, FunctionHandler> = {
   postWin,
   getTimeUntilNextGraph,
   getLeaderboard,
+  listWins,
 };

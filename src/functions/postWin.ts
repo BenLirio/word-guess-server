@@ -1,5 +1,5 @@
 import { getAndDeleteToken } from '../ddb/token';
-import { postMessageToThread } from '../discord/postMessage';
+import { incrementWin } from '../ddb/wins';
 import { FunctionContext } from '../types';
 import { PostWinRequest, PostWinResponse } from '../types/shared';
 
@@ -23,6 +23,11 @@ export const postWin: (
     const message = `User "${username}" has won with word "${word}"!
 x-axis: ${leftXPercent} ${leftX} <----> ${rightXPercent} ${rightX}
 y-axis: ${leftYPercent} ${leftY} <----> ${rightYPercent} ${rightY}`;
-    await postMessageToThread(message);
-    return {};
+    console.log('Posting message to thread:', message);
+    // await postMessageToThread(message);
+    const { incremented, winCount } = await incrementWin(ctxt)({ username });
+    return {
+      incremented,
+      winCount,
+    };
   };

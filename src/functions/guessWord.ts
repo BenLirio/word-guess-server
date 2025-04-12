@@ -1,9 +1,14 @@
 import { rankWord } from '../ai/rankWord';
+import { validateGuess } from '../ai/validateGuess';
 import { saveWin } from '../ddb/leaderboard';
 import { storeToken } from '../ddb/token';
+import { listEmbeddings } from '../s3/listEmbeddings';
 import { FunctionContext, Spectrum } from '../types';
 import { GuessWordFunction, GuessWordRequest, WordTarget } from '../types/shared';
 import { v4 as uuidv4 } from 'uuid';
+import { findSimilarWords } from '../util';
+import { getEmbedding } from '../ai/getEmbedding';
+import { addEmbedding } from '../s3/addEmbedding';
 
 const rankWordBothDirections =
   (ctxt: FunctionContext) =>
@@ -50,24 +55,41 @@ const didHitTarget =
 
 const generateWinToken = () => uuidv4();
 
+const validateWord = (word: string) => {
+  if (word.length < 3) {
+    throw new Error('Word must be at least 3 characters long');
+  }
+  if (word.length > 20) {
+    throw new Error('Word must be at most 20 characters long');
+  }
+};
+
 export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
   (ctxt: FunctionContext) =>
   async ({ word }: GuessWordRequest) => {
+    validateWord(word);
     const { spectrum, target } = ctxt;
+    const [validationGuessResultX, validationGuessResultY] = await Promise.all([
+      validateGuess(ctxt)({ word, spectrum: spectrum.x }),
+      validateGuess(ctxt)({ word, spectrum: spectrum.y }),
+    ]);
+    console.log(validationGuessResultX);
+    console.log(validationGuessResultY);
+    if (!validationGuessResultX.isFair) {
+      throw new Error(validationGuessResultX.reasoning);
+    }
+    if (!validationGuessResultY.isFair) {
+      throw new Error(validationGuessResultY.reasoning);
+    }
+
     const [resultX, resultY] = await Promise.all([
       rankSeveralRanges(ctxt)(spectrum.x)(word),
       rankSeveralRanges(ctxt)(spectrum.y)(word),
     ]);
-    // if the word matches regex `x=\d+,y=\d+` then parse it
-    const regex = /x=(\d+),y=(\d+)/;
-    const match = word.match(regex);
-    const xOverride = match ? parseFloat(match[1]) / 100 : undefined;
-    const yOverride = match ? parseFloat(match[2]) / 100 : undefined;
 
     const x = formatRankResult(resultX.rank);
     const y = formatRankResult(resultY.rank);
-    console.log('x', x, 'y', y);
-    const hitTarget = didHitTarget({ x, y })(target) || word === 'win';
+    const hitTarget = didHitTarget({ x, y })(target);
     const token = hitTarget ? generateWinToken() : undefined;
     if (token !== undefined) {
       await storeToken(ctxt)({ token, word });
@@ -75,12 +97,22 @@ export const guessWord: (ctxt: FunctionContext) => GuessWordFunction =
     const result = {
       id: uuidv4(),
       word,
-      x: xOverride !== undefined ? xOverride : x,
-      y: yOverride !== undefined ? yOverride : y,
+      x,
+      y,
       hitTarget,
       token,
       timestamp: Date.now(),
     };
+
+    if (hitTarget) {
+      const embeddings = await listEmbeddings(ctxt)();
+      const embedding = await getEmbedding(ctxt)(word);
+      const similarWords = findSimilarWords(embeddings, { word, embedding }, 0.2);
+      if (similarWords.length > 0) {
+        throw new Error('Word is too similar to another players word: ' + similarWords.join(', '));
+      }
+      await addEmbedding(ctxt)({ word, embedding });
+    }
     await saveWin(ctxt)(result);
     return result;
   };

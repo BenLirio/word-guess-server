@@ -1,32 +1,69 @@
 import { WordSpectrum, WordTarget } from './types/shared';
 
 export const spectrums: WordSpectrum[] = [
-  { x: { left: 'Sweet', right: 'Savory' }, y: { left: 'Light Snack', right: 'Heavy Meal' } },
-  { x: { left: 'Fiction', right: 'Non-Fiction' }, y: { left: 'Short Story', right: 'Epic Novel' } },
+  { x: { left: 'Crunchy', right: 'Soft' }, y: { left: 'Sweet', right: 'Savory' } },
   {
-    x: { left: 'Relaxing', right: 'Exciting' },
-    y: { left: 'Home Activity', right: 'Travel Adventure' },
+    x: { left: 'Makes you laugh', right: 'Makes you cry' },
+    y: { left: 'Watch with friends', right: 'Watch alone' },
   },
-  { x: { left: 'Budget', right: 'Luxury' }, y: { left: 'Basic Need', right: 'Total Indulgence' } },
-  { x: { left: 'Digital', right: 'Analog' }, y: { left: 'Old Tech', right: 'New Tech' } },
-  { x: { left: 'Popular', right: 'Obscure' }, y: { left: 'Mainstream', right: 'Cult Classic' } },
-  { x: { left: 'Day', right: 'Night' }, y: { left: 'Morning Person', right: 'Night Owl' } },
-  { x: { left: 'Past', right: 'Future' }, y: { left: 'Ancient', right: 'Futuristic' } },
-  { x: { left: 'Safe', right: 'Risky' }, y: { left: 'Calculated', right: 'Impulsive' } },
-  { x: { left: 'Urban', right: 'Rural' }, y: { left: 'Crowded', right: 'Isolated' } },
-  { x: { left: 'Comedy', right: 'Drama' }, y: { left: 'Lighthearted', right: 'Serious' } },
-  { x: { left: 'Indoors', right: 'Outdoors' }, y: { left: 'Stationary', right: 'Active' } },
-  { x: { left: 'Science', right: 'Art' }, y: { left: 'Precise', right: 'Expressive' } },
-  { x: { left: 'Formal', right: 'Casual' }, y: { left: 'Professional', right: 'Personal' } },
-  { x: { left: 'Introverted', right: 'Extroverted' }, y: { left: 'Private', right: 'Public' } },
   {
-    x: { left: 'Tradition', right: 'Innovation' },
-    y: { left: 'Conventional', right: 'Experimental' },
+    x: { left: 'Likely to cuddle', right: 'Likely to bite' },
+    y: { left: 'Can live in apartment', right: 'Definitely outdoor-only' },
   },
-  { x: { left: 'Reality', right: 'Fantasy' }, y: { left: 'Natural', right: 'Magical' } },
-  { x: { left: 'Easy', right: 'Challenging' }, y: { left: 'Beginner', right: 'Expert' } },
-  { x: { left: 'Silent', right: 'Loud' }, y: { left: 'Peaceful', right: 'Chaotic' } },
-  { x: { left: 'Structured', right: 'Spontaneous' }, y: { left: 'Planned', right: 'Improvised' } },
+  {
+    x: { left: 'Helpful in emergencies', right: 'Helpful at parties' },
+    y: { left: 'Subtle power', right: 'Very flashy power' },
+  },
+  { x: { left: 'Practical', right: 'Novelty' }, y: { left: 'Expensive', right: 'Cheap' } },
+  {
+    x: { left: 'Pleasant sound', right: 'Annoying sound' },
+    y: { left: 'Very loud', right: 'Barely audible' },
+  },
+  {
+    x: { left: 'Physically exhausting', right: 'Mentally exhausting' },
+    y: { left: 'Relaxing afterward', right: 'Stressful afterward' },
+  },
+  { x: { left: 'Fast', right: 'Slow' }, y: { left: 'Stylish', right: 'Embarrassing' } },
+  {
+    x: { left: 'Minimalist', right: 'Cluttered' },
+    y: { left: 'Timeless', right: 'Quickly outdated' },
+  },
+  {
+    x: { left: 'Friendly', right: 'Hostile' },
+    y: { left: 'Majestic-looking', right: 'Silly-looking' },
+  },
+  {
+    x: { left: 'Easy to spell', right: 'Impossible to spell' },
+    y: { left: 'Fun to say', right: 'Awkward to say' },
+  },
+  {
+    x: { left: 'Can buy in bulk', right: 'Only sold individually' },
+    y: { left: 'Lasts forever', right: 'Spoils immediately' },
+  },
+  { x: { left: 'Common pet', right: 'Wild animal' }, y: { left: 'Fluffy', right: 'Scaly' } },
+  {
+    x: { left: 'Smells wonderful', right: 'Smells terrible' },
+    y: { left: 'Safe to touch', right: 'Dangerous to touch' },
+  },
+  {
+    x: { left: 'Common fear', right: 'Irrational fear' },
+    y: { left: 'Very serious', right: 'Silly' },
+  },
+  { x: { left: 'Healthy', right: 'Unhealthy' }, y: { left: 'Delicious', right: 'Disgusting' } },
+  {
+    x: { left: 'High-tech', right: 'Low-tech' },
+    y: { left: 'User-friendly', right: 'Infuriating to use' },
+  },
+  { x: { left: 'Better hot', right: 'Better cold' }, y: { left: 'Liquid', right: 'Solid' } },
+  {
+    x: { left: 'Realistic', right: 'Fantasy' },
+    y: { left: 'Appropriate for kids', right: 'Strictly adults only' },
+  },
+  { x: { left: 'Ancient', right: 'Modern' }, y: { left: 'Peaceful', right: 'Chaotic' } },
+  {
+    x: { left: 'Highly addictive', right: 'Completely unappealing' },
+    y: { left: 'Socially acceptable', right: 'Socially frowned-upon' },
+  },
 ];
 
 export const targets: WordTarget[] = [

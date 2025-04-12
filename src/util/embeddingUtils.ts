@@ -20,3 +20,17 @@ export const normalizeEmbedding = (embedding: number[]) => {
   }
   return embedding.map((a) => a / magnitude);
 };
+
+export const findSimilarWords = (
+  embeddings: { word: string; embedding: number[] }[],
+  { word, embedding }: { word: string; embedding: number[] },
+  tolerance: number,
+): string[] => {
+  return embeddings
+    .filter((e) => {
+      const similarity = cosineSimilarity(embedding, e.embedding);
+      console.log(`Comparing ${word} with ${e.word}: similarity = ${similarity}`);
+      return similarity >= 1 - tolerance;
+    })
+    .map((e) => e.word);
+};

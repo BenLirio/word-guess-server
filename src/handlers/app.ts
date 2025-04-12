@@ -9,6 +9,7 @@ const ddb = new AWS.DynamoDB.DocumentClient();
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+const s3 = new AWS.S3();
 
 const start = 1743818606072;
 
@@ -42,6 +43,7 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
       event,
       context,
       ddb,
+      s3,
       openai,
       spectrum: spectrums[idx % spectrums.length],
       target: targets[idx % targets.length],
@@ -68,8 +70,8 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
         'Access-Control-Allow-Credentials': 'true',
       },
       body: JSON.stringify({
-        message: 'Internal Server Error',
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: 'Internal Server Error',
+        message: error instanceof Error ? error.message : 'Unknown error',
       }),
     };
   }

@@ -1,22 +1,6 @@
 import { FunctionContext } from '../types';
-import { GuessWordResponse, LeaderboardEntry, WordSpectrum, WordTarget } from '../types/shared';
-
-const sha256HashSpectrumAndTarget = (wordSpectrum: WordSpectrum, wordTarget: WordTarget) => {
-  const hash = require('crypto').createHash('sha256');
-  const parts = [
-    wordSpectrum.x.left,
-    wordSpectrum.x.right,
-    wordSpectrum.y.left,
-    wordSpectrum.y.right,
-    wordTarget.x,
-    wordTarget.y,
-    wordTarget.size,
-  ]
-    .map((part) => part.toString())
-    .join(':');
-  hash.update(parts);
-  return hash.digest('hex');
-};
+import { GuessWordResponse, LeaderboardEntry } from '../types/shared';
+import { sha256HashSpectrumAndTarget } from '../util/hash';
 
 export const saveWin =
   ({ ddb, spectrum, target }: FunctionContext) =>
