@@ -12,7 +12,7 @@ export const spectrums: WordSpectrum[] = [
   },
   {
     x: { left: 'Helpful in emergencies', right: 'Helpful at parties' },
-    y: { left: 'Subtle power', right: 'Very flashy power' },
+    y: { left: 'Subtle power', right: 'Flashy power' },
   },
   { x: { left: 'Practical', right: 'Novelty' }, y: { left: 'Expensive', right: 'Cheap' } },
   {
@@ -23,7 +23,7 @@ export const spectrums: WordSpectrum[] = [
     x: { left: 'Physically exhausting', right: 'Mentally exhausting' },
     y: { left: 'Relaxing afterward', right: 'Stressful afterward' },
   },
-  { x: { left: 'Fast', right: 'Slow' }, y: { left: 'Stylish', right: 'Embarrassing' } },
+  { x: { left: 'Fast', right: 'Slow' }, y: { left: 'Stylish', right: 'Unfashionable' } },
   {
     x: { left: 'Minimalist', right: 'Cluttered' },
     y: { left: 'Timeless', right: 'Quickly outdated' },
@@ -33,12 +33,12 @@ export const spectrums: WordSpectrum[] = [
     y: { left: 'Majestic-looking', right: 'Silly-looking' },
   },
   {
-    x: { left: 'Easy to spell', right: 'Impossible to spell' },
+    x: { left: 'Easy to spell', right: 'Hard to spell' },
     y: { left: 'Fun to say', right: 'Awkward to say' },
   },
   {
     x: { left: 'Can buy in bulk', right: 'Only sold individually' },
-    y: { left: 'Lasts forever', right: 'Spoils immediately' },
+    y: { left: 'Lasts forever', right: 'Spoils quickly' },
   },
   { x: { left: 'Common pet', right: 'Wild animal' }, y: { left: 'Fluffy', right: 'Scaly' } },
   {
@@ -46,23 +46,51 @@ export const spectrums: WordSpectrum[] = [
     y: { left: 'Safe to touch', right: 'Dangerous to touch' },
   },
   {
-    x: { left: 'Common fear', right: 'Irrational fear' },
-    y: { left: 'Very serious', right: 'Silly' },
+    x: { left: 'Common fear', right: 'Rare fear' },
+    y: { left: 'Serious', right: 'Silly' },
   },
   { x: { left: 'Healthy', right: 'Unhealthy' }, y: { left: 'Delicious', right: 'Disgusting' } },
   {
     x: { left: 'High-tech', right: 'Low-tech' },
-    y: { left: 'User-friendly', right: 'Infuriating to use' },
+    y: { left: 'User-friendly', right: 'Difficult to use' },
   },
   { x: { left: 'Better hot', right: 'Better cold' }, y: { left: 'Liquid', right: 'Solid' } },
   {
     x: { left: 'Realistic', right: 'Fantasy' },
-    y: { left: 'Appropriate for kids', right: 'Strictly adults only' },
+    y: { left: 'Kid-friendly', right: 'Adult-only' },
   },
   { x: { left: 'Ancient', right: 'Modern' }, y: { left: 'Peaceful', right: 'Chaotic' } },
   {
-    x: { left: 'Highly addictive', right: 'Completely unappealing' },
-    y: { left: 'Socially acceptable', right: 'Socially frowned-upon' },
+    x: { left: 'Highly addictive', right: 'Not addictive' },
+    y: { left: 'Socially acceptable', right: 'Socially unacceptable' },
+  },
+  {
+    x: { left: 'Introvert-friendly', right: 'Extrovert-friendly' },
+    y: { left: 'Planned', right: 'Spontaneous' },
+  },
+  {
+    x: { left: 'Tastes good', right: 'Tastes bad' },
+    y: { left: 'Looks appealing', right: 'Looks unappealing' },
+  },
+  {
+    x: { left: 'Useful', right: 'Useless' },
+    y: { left: 'Great gift', right: 'Terrible gift' },
+  },
+  {
+    x: { left: 'Thrives under pressure', right: 'Crumbles under pressure' },
+    y: { left: 'Team-oriented', right: 'Independent' },
+  },
+  {
+    x: { left: 'Nostalgic', right: 'Regrettable' },
+    y: { left: 'Wholesome', right: 'Questionable' },
+  },
+  {
+    x: { left: 'Life-changing', right: 'Forgettable' },
+    y: { left: 'Rare', right: 'Common' },
+  },
+  {
+    x: { left: 'Cheap', right: 'Expensive' },
+    y: { left: 'Worth it', right: 'Not worth it' },
   },
 ];
 

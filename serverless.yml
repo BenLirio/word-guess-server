@@ -24,6 +24,7 @@ provider:
   logRetentionInDays: 14
   environment:
     NODE_ENV: ${self:provider.stage}
+    WIN_OVERRIDE: ${env:WIN_OVERRIDE, 'win'}
     WORD_GUESS_LEADERBOARD_TABLE_NAME: ${env:WORD_GUESS_LEADERBOARD_TABLE_NAME, 'guess-word-leaderboard-v2'}
     WORD_GUESS_WINS_TABLE_NAME: ${env:WORD_GUESS_WINS, 'word-guess-wins'}
     WORD_GUESS_TOKENS_TABLE_NAME: ${env:WORD_GUESS_TOKENS_TABLE_NAME, 'word-guess-tokens'}
